@@ -3,7 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Resources\MenuResource;
+use App\Http\Resources\GoogleUserResource;
 use App\Models\Menu;
+use App\Models\GoogleUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,12 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('menu', 'MenuController');
-// Route::get('menu', 'MenuController@index');
-// Route::post('menu', 'MenuController@create');
-// Route::put('/menu/{id}', 'MenuController@update');
-// Route::delete('/menu/{id}', 'MenuController@delete');
-// Route::post('menu', 'MenuController@store');
-
+Route::apiResource('google', 'GoogleUserController');
 
 Route::get('/menu/{id}', function($id){
     return new MenuResource(Menu::findOrFail($id));

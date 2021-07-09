@@ -8,7 +8,6 @@ use App\Http\Resources\MenuResource;
 
 class MenuController extends Controller
 {
-    //
     public function index(){   
         $menu = Menu::all();
         if(count($menu)>0){
