@@ -18,4 +18,14 @@ class Menu extends Model
         'detail',
         'status',
     ];
+
+    public function scopeFilter($query, $filters)
+  {
+    if( isset($filters['type']) ){
+      $query->where('type', '=', $filters['type']);
+    }
+  }
+    // public function image(){
+    //     return $this->morphOne(Image::class , 'imageable');
+    // }
 }

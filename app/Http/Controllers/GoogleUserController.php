@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\GoogleUser;
 use App\Http\Resources\GoogleUserResource;
+use Illuminate\Support\Facades\Validator;
 
 class GoogleUserController extends Controller
 {
@@ -16,11 +17,11 @@ class GoogleUserController extends Controller
     public function index()
     {
         $google = GoogleUser::all();
-        if(count($google)>0){
+        if (count($google) > 0) {
             $res['message'] = "SUCCESS!";
             $res['user'] = $google;
             return response($res);
-        }else{
+        } else {
             $res['message'] = "EMPTY!";
             return response($res);
         }
@@ -34,17 +35,6 @@ class GoogleUserController extends Controller
      */
     public function create()
     {
-        //
-        $google = new GoogleUser;
-        $google->email = $request->email;
-        $google->email_verified = $request->email_verified;
-        $google->picture = $request->picture;
-        $google->given_name = $request->given_name;
-        $google->family_name = $request->family_name;
-        $google->locale = $request->locale;
-        $google->save();
-
-        return response()->json(["user" => $google],200);;
     }
 
     /**
@@ -55,12 +45,21 @@ class GoogleUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        
-        $input =$request->all();
-        $google = GoogleUser::create($input);
+        // $input = GoogleUser::updateOrCreate([
+        // 'user_ud' => $user_id,
+
+        // ]);
+        $google = GoogleUser::firstOrCreate([
+
+            'user_id' =>  $request->user_id,
+            'email' =>  $request->email,
+            'name' =>  $request->name,
+            'picture' =>  $request->picture,
+            'given_name' =>  $request->given_name,
+            'family_name' =>  $request->family_name,
+        ]);
+        //$google = GoogleUser::create($input);
         return new GoogleUserResource($google);
-        
     }
 
     /**

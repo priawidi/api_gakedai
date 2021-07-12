@@ -10,13 +10,12 @@ class GoogleUser extends Model
     use HasFactory;
 
     protected $fillable =[
+        'user_id',
         'email',
-        'email_verified',
         'name',
         'picture',
         'given_name',
         'family_name',
-        'locale'
         
     ];
 }

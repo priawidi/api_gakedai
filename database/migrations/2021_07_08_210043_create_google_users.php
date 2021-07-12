@@ -15,13 +15,12 @@ class CreateGoogleusers extends Migration
     {
         Schema::create('google_users', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id');
             $table->string('email');
-            $table->string('email_verified');
             $table->string('name');
             $table->string('picture');
             $table->string('given_name');
             $table->string('family_name');
-            $table->string('locale');
             $table->timestamps();
         });
     }
