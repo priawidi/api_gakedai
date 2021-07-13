@@ -19,6 +19,11 @@ class Menu extends Model
         'status',
     ];
 
+    public function Carts()
+    {
+        return $this->belongsTo('App\Models\Cart');
+    }
+
     public function scopeFilter($query, $filters)
   {
     if( isset($filters['type']) ){

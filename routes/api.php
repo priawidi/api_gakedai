@@ -35,20 +35,22 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResource('menu', 'MenuController');
 Route::post('token', 'MenuController@tokensignin');
 Route::get('filter/{type}', 'MenuController@filter');
+
 Route::apiResource('google', 'GoogleUserController');
+
 Route::apiResource('cart', 'CartController');
-// Route::get('cart','CartController@index');
-// Route::get('cart/{cart}','CartController@show');
-// Route::post('cart','CartController@store');
-// Route::put('cart/{cart}','CartController@update');
-// Route::delete('cart','CartController@update');
+Route::get('image/{cart}', 'CartController@showimage');
+Route::post('cartmin/{cart}', 'CartController@decrease');
+
+Route::apiResource('history', 'UserHistoryController');
+Route::get('history_image/{history}', 'UserHistoryController@showimage');
+
+Route::apiResource('order_item', 'OrderItemController');
+Route::get('order_item_image/{oreder_item}', 'OrderItemController@showimage');
+
+Route::apiResource('order_history', 'OrderHistoryController');
+Route::get('order_history_image/{order_history}', 'OrderHistoryController@showimage');
 
 Route::get('/menu/{id}', function($id){
     return new MenuResource(Menu::findOrFail($id));
 });
-
-// Route::group(['middleware' => 'auth:api'], function(){
-// 	Route::get('details', [SocialController::class, 'details']);
-//Route::post('tokensignin', 'SocialController@tokensignin');
-
-// });
