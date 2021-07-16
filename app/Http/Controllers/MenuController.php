@@ -98,6 +98,7 @@ class MenuController extends Controller
             'updated_at' => date("Y-m-d H:i:s")
         ];
         Menu::insert($data);
+        return response()->json($data);
     }
 
 

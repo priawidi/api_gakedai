@@ -21,6 +21,8 @@ class CreateOrderItemsTable extends Migration
             $table->string('item_name');
             $table->string('item_price');
             $table->string('item_photo');
+            $table->string('unique_code');
+            $table->string('meja_id');
             $table->timestamps();
         });
     }

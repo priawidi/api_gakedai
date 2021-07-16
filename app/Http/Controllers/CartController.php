@@ -59,7 +59,7 @@ class CartController extends Controller
             'user_name' => $request->user_name,
             'item_qty' => $request->item_qty,
             'item_name' => $request->item_name,
-            'item_price' => $request->item_price,
+            'item_price' => $request->item_price * $request->item_qty,
             'item_photo' => $request->item_photo,
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
@@ -78,7 +78,7 @@ class CartController extends Controller
         } elseif ($namaitem && $iduser) {
             $keranjang = new Cart;
             $keranjang->where('item_name', '=', $request->item_name)->increment('item_qty', $request->item_qty);
-            $keranjang->where('item_name', '=', $request->item_name)->increment('item_price', $request->item_price);
+            $keranjang->where('item_name', '=', $request->item_name)->increment('item_price', $request->item_price * $request->item_qty);
             return response()->json('Updated');
         } else {
             Cart::insert($data);

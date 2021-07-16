@@ -50,20 +50,20 @@ class OrderHistoryController extends Controller
     {
         //
         $this->validate($request, [
-            'meja' => 'required',
+            
             'user_id' => 'required',
             'user_name' => 'required',
             'total_price' => 'required',
             'unique_code' => 'required',
-            'order_date' => 'required',
-            'order_time' => 'required',
+            'meja_id' => 'required',
         ]);        
         $data = [
-            'meja' => $request->meja,
+            
             'user_id' => $request->user_id,
             'user_name' => $request->user_name,
             'total_price' => $request->total_price,
             'unique_code' => $request->unique_code,
+            'meja_id' => $request->meja_id,
             'order_date' => date("Y-m-d"),
             'order_time' => date("Y-m-d H:i:s")
         ];
@@ -82,7 +82,7 @@ class OrderHistoryController extends Controller
     {
         //
         if($id ==  $id){
-            $cart= OrderHistory::select('id','user_id','item_qty', 'item_name', 'item_price', 'item_photo')->where('user_id', $id)->get();
+            $cart= OrderHistory::select('id','user_id','user_name','total_price', 'unique_code', 'meja_id', 'order_date', 'order_time')->where('user_id', $id)->get();
             $res['message'] = "SUCCESS!";
             $res['menu'] = $cart;
             return response()->json($res);

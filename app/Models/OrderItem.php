@@ -16,6 +16,8 @@ class OrderItem extends Model
         'item_qty',
         'item_name',
         'item_price',
-        'item_photo'
+        'item_photo',
+        'unique_code',
+        'meja_id'
     ];
 }

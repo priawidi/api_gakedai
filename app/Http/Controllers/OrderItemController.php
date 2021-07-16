@@ -57,6 +57,8 @@ class OrderItemController extends Controller
             'item_name' => 'required',
             'item_price' => 'required',
             'item_photo' => 'required',
+            'unique_code' => 'required',
+            'meja_id' => 'required',
         ]);        
         $data = [
             'user_id' => $request->user_id,
@@ -65,6 +67,8 @@ class OrderItemController extends Controller
             'item_name' => $request->item_name,
             'item_price' => $request->item_price,
             'item_photo' => $request->item_photo,
+            'unique_code' => $request->unique_code,
+            'meja_id' => $request->meja_id,
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ];
@@ -79,11 +83,11 @@ class OrderItemController extends Controller
         if($tabel->isEmpty()){
             OrderItem::insert($data);
             return response()->json($data);
-        }elseif($namaitem && $iduser){
-            $keranjang = new OrderItem;
-            $keranjang->where('item_name', '=', $request->item_name)->increment('item_qty', $request ->item_qty);
-            $keranjang->where('item_name', '=', $request->item_name)->increment('item_price', $request ->item_price);
-            return response()->json('Updated');
+        // }elseif($namaitem && $iduser){
+        //     $keranjang = new OrderItem;
+        //     $keranjang->where('item_name', '=', $request->item_name)->increment('item_qty', $request ->item_qty);
+        //     $keranjang->where('item_name', '=', $request->item_name)->increment('item_price', $request ->item_price);
+        //     return response()->json('Updated');
         }else{
             OrderItem::insert($data);
             return response()->json('beda bos');
@@ -101,7 +105,7 @@ class OrderItemController extends Controller
     {
         //
         if($id ==  $id){
-            $hist= OrderHistory::select('id','user_id','item_qty', 'item_name', 'item_price', 'item_photo')->where('user_id', $id)->get();
+            $hist= OrderItem::select('id','user_id','user_name','item_qty', 'item_name', 'item_price', 'item_photo','unique_code','meja_id')->where('user_id', $id)->get();
             $res['message'] = "SUCCESS!";
             $res['menu'] = $hist;
             return response()->json($res);

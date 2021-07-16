@@ -15,11 +15,11 @@ class CreateOrderHistoriesTable extends Migration
     {
         Schema::create('order_histories', function (Blueprint $table) {
             $table->id();
-            $table->string('meja');
             $table->string('user_id');
             $table->string('user_name');
             $table->string('total_price');
             $table->string('unique_code');
+            $table->string('meja_id');
             $table->string('order_date');
             $table->string('order_time');
             $table->timestamps();
